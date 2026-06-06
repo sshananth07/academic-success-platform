@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-    REDIS_URL: str = "redis://localhost:6379"
+    REDIS_URL: str = "redis://localhost:6379"  # optional — app works without Redis, just no paper caching
     GEMINI_API_KEY: str
     SUPABASE_URL: str
     SUPABASE_ANON_KEY: str

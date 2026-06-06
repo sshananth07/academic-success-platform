@@ -42,16 +42,16 @@ async def fetch_papers(
         types = ["journal", "conference"]
 
     filters_json = json.dumps({"year_from": year_from, "year_to": year_to, "sources": sorted(sources), "types": sorted(types)})
-    redis = aioredis.from_url(settings.REDIS_URL, decode_responses=True)
     cache_key = _cache_key(topic, filters_json)
-
+    redis = None
     try:
+        redis = aioredis.from_url(settings.REDIS_URL, decode_responses=True)
         cached = await redis.get(cache_key)
         if cached:
             await redis.aclose()
             return json.loads(cached)
     except Exception:
-        pass
+        redis = None
 
     papers: list[dict] = []
 
@@ -146,11 +146,12 @@ async def fetch_papers(
         if not any(_titles_similar(paper["title"], u["title"]) for u in unique):
             unique.append(paper)
 
-    try:
-        await redis.set(cache_key, json.dumps(unique), ex=REDIS_TTL)
-    except Exception:
-        pass
-    finally:
-        await redis.aclose()
+    if redis is not None:
+        try:
+            await redis.set(cache_key, json.dumps(unique), ex=REDIS_TTL)
+        except Exception:
+            pass
+        finally:
+            await redis.aclose()
 
     return unique
