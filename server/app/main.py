@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -9,15 +9,6 @@ app = FastAPI(
     version="2.0.0",
     description="Centralised academic support platform for B40 students in Malaysian universities.",
 )
-
-def _is_allowed_origin(origin: str) -> bool:
-    allowed = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        settings.CLIENT_URL.rstrip("/"),
-    ]
-    o = origin.rstrip("/")
-    return o in allowed or o.endswith(".onrender.com")
 
 app.add_middleware(
     CORSMiddleware,
