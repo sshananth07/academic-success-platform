@@ -173,8 +173,11 @@ function FeedbackDashboard({ result, onNewReview }) {
     critical:  normaliseScore(result.criticalAnalysisScore),
   }
 
+  const presentScores = Object.values(scoreMap).filter(s => s > 0)
   const overallScore = Math.min(10, Math.round(
-    Object.values(scoreMap).reduce((a, b) => a + (b || 0), 0) / DIMENSIONS.length
+    presentScores.length > 0
+      ? presentScores.reduce((a, b) => a + b, 0) / presentScores.length
+      : 0
   ))
 
   return (
