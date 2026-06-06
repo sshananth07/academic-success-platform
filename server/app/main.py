@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -10,14 +10,19 @@ app = FastAPI(
     description="Centralised academic support platform for B40 students in Malaysian universities.",
 )
 
-# CORS must be added before routers
+def _is_allowed_origin(origin: str) -> bool:
+    allowed = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        settings.CLIENT_URL.rstrip("/"),
+    ]
+    o = origin.rstrip("/")
+    return o in allowed or o.endswith(".onrender.com")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        settings.CLIENT_URL,
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["X-Session-Id", "X-Sources", "X-Sources-Detail", "X-Confidence"],
