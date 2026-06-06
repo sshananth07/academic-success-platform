@@ -1,0 +1,300 @@
+{
+  "app": {
+    "name": "AI Academic Success Platform",
+    "tagline": "Empowering B40 Students in Malaysian Universities"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "research": "Research Discovery",
+    "integrity": "Integrity Advisor",
+    "writing": "Writing Support",
+    "sources": "Source Organiser",
+    "grant": "Grant Checker",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "subtitle": "How can we help you succeed today?",
+    "modulesLabel": "Your tools",
+    "continueLabel": "Continue where you left off",
+    "continueBtn": "Continue",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No activity yet — pick a tool to get started.",
+    "stats": {
+      "research": "Research Tasks",
+      "sources": "Sources Organised",
+      "writing": "Drafts Reviewed"
+    },
+    "activityType": {
+      "research": "Research",
+      "writing": "Writing",
+      "sources": "Sources",
+      "grant": "Grant",
+      "chat": "Integrity"
+    },
+    "cta": {
+      "research": "Start a literature search",
+      "integrity": "Ask an integrity question",
+      "writing": "Review a draft"
+    },
+    "modules": {
+      "research": {
+        "title": "Research Discovery",
+        "desc": "Find and synthesise academic literature on any topic",
+        "action": "New Search"
+      },
+      "integrity": {
+        "title": "Integrity Advisor",
+        "desc": "Get guidance on academic integrity rules and AI-use policies",
+        "action": "Ask a Question"
+      },
+      "writing": {
+        "title": "Writing Support",
+        "desc": "Receive structured feedback on your academic draft",
+        "action": "Review Draft"
+      },
+      "sources": {
+        "title": "Source Organiser",
+        "desc": "Format and annotate your references in APA 7th Edition",
+        "action": "Organise Sources"
+      },
+      "grant": {
+        "title": "Grant Checker",
+        "desc": "Evaluate your FRGS proposal against scoring criteria",
+        "action": "Evaluate Proposal"
+      }
+    }
+  },
+  "research": {
+    "title": "Research Discovery",
+    "subtitle": "Discover and synthesise academic literature from Semantic Scholar and CrossRef",
+    "placeholder": "Enter a research topic (e.g. machine learning in Malaysian education)",
+    "button": "Discover",
+    "newSearch": "New Search",
+    "loading": "Searching academic databases...",
+    "themes": "Key Themes",
+    "findings": "Major Findings",
+    "contradictions": "Contradictions",
+    "gaps": "Research Gaps",
+    "sources": "Sources Found",
+    "noResults": "No papers found. Try a broader search topic.",
+    "openAccess": "Open Access",
+    "popularTopics": "Popular Topics",
+    "whatYouGet": "What you'll get",
+    "howItWorks": "How it works",
+    "step1": "We search Semantic Scholar and CrossRef for real academic papers on your topic.",
+    "step2": "An AI synthesises the literature into themes, findings, and contradictions.",
+    "step3": "You receive a structured report with cited sources you can explore further."
+  },
+  "chat": {
+    "title": "Integrity Advisor",
+    "subtitle": "Ask about academic integrity, AI-use policies, plagiarism rules, and citation standards",
+    "placeholder": "Ask about academic integrity, plagiarism, AI use, or citations...",
+    "send": "Send",
+    "newChat": "New Chat",
+    "sessions": "Previous Conversations",
+    "typing": "Advisor is thinking...",
+    "sources": "Policy sources used",
+    "disclaimer": "Responses are grounded in UAM policy documents",
+    "basedOn": "Based on",
+    "policyMatch": "Policy Match",
+    "suggestedQuestions": "Suggested Questions",
+    "categories": {
+      "label": "Browse by category",
+      "integrity": "Academic Integrity",
+      "ai": "AI Usage",
+      "plagiarism": "Plagiarism",
+      "citation": "Citation Rules",
+      "assessment": "Assessment Policy"
+    },
+    "confidence": {
+      "High": "High",
+      "Medium": "Medium",
+      "Low": "Low"
+    }
+  },
+  "writing": {
+    "title": "Writing Support",
+    "subtitle": "Get structured feedback on your academic draft",
+    "placeholder": "Paste your introduction, discussion, or full draft for review...",
+    "button": "Get Feedback",
+    "newReview": "New Review",
+    "loading": "Analysing your draft...",
+    "wordCount": "words",
+    "maxWords": "Maximum 1000 words",
+    "minWords": "Minimum 10 words",
+    "clarity": "Clarity",
+    "academicTone": "Academic Tone",
+    "structure": "Structure",
+    "evidence": "Evidence Use",
+    "grammar": "Grammar",
+    "criticalAnalysis": "Critical Analysis",
+    "citations": "Citation Analysis",
+    "paragraphFeedback": "Paragraph-Level Feedback",
+    "grammarIssues": "Grammar Issues",
+    "strengths": "Strengths",
+    "improvements": "Suggestions for Improvement",
+    "hasCitations": "Citations detected",
+    "noCitations": "No citations detected",
+    "whatYouGet": "What you'll get",
+    "metrics": {
+      "words": "Words",
+      "tone": "Academic Tone",
+      "readability": "Readability",
+      "passive": "Passive Voice"
+    },
+    "toneLevel": {
+      "Good": "Good",
+      "Fair": "Fair",
+      "Weak": "Weak"
+    },
+    "readabilityLevel": {
+      "Easy": "Easy",
+      "Medium": "Medium",
+      "Complex": "Complex"
+    },
+    "severity": {
+      "high": "Needs rewrite",
+      "medium": "Needs improvement",
+      "low": "Minor tweak"
+    },
+    "dimensions": {
+      "structure": "Structure",
+      "clarity": "Clarity",
+      "tone": "Academic Tone",
+      "grammar": "Grammar",
+      "evidence": "Evidence Usage",
+      "critical": "Critical Analysis"
+    }
+  },
+  "sources": {
+    "title": "Source Organiser",
+    "subtitle": "Add URLs, DOIs, or paper titles — get APA 7th Edition citations instantly",
+    "addSource": "Add Source",
+    "addPlaceholder": "Paste a URL, DOI, or paper title…",
+    "button": "Organise Sources",
+    "loading": "Formatting your references...",
+    "results": "Your References",
+    "newSession": "Start Over",
+    "duplicate": "Source already exists",
+    "maxReached": "Maximum 15 sources reached",
+    "emptyHint": "Add at least one source to get started",
+    "sourceType": {
+      "journal-article": "Journal Article",
+      "book": "Book",
+      "website": "Website",
+      "conference-paper": "Conference Paper",
+      "report": "Report",
+      "thesis": "Thesis",
+      "unknown": "Unknown"
+    },
+    "sourceTypeShort": {
+      "journal-article": "DOI / Journal",
+      "book": "Book",
+      "website": "Website",
+      "conference-paper": "Conference",
+      "report": "Report",
+      "thesis": "Thesis",
+      "unknown": "Unknown"
+    },
+    "credibility": {
+      "peer-reviewed": "Peer-Reviewed",
+      "grey-literature": "Grey Literature",
+      "news": "News",
+      "blog": "Blog",
+      "unknown": "Unknown"
+    },
+    "export": {
+      "copyApa": "Copy APA",
+      "copyAll": "Copy All",
+      "bibtex": "Export BibTeX",
+      "ris": "Export RIS",
+      "word": "Export Word",
+      "copied": "Copied!"
+    },
+    "preview": {
+      "label": "APA Preview",
+      "hint": "Final citation will be generated after organising"
+    },
+    "accessible": "Open Access",
+    "maxSources": "Maximum 15 sources",
+    "history": {
+      "label": "Saved Sessions",
+      "empty": "No saved sessions yet",
+      "sources": "source",
+      "sources_plural": "sources",
+      "loadError": "Could not load session"
+    }
+  },
+  "grant": {
+    "title": "Grant Proposal Checker",
+    "subtitle": "Evaluate your FRGS proposal against the four key scoring criteria",
+    "placeholder": "Paste your grant proposal text here (minimum 50 words, maximum 3000 words)...",
+    "button": "Evaluate Proposal",
+    "loading": "Evaluating your proposal...",
+    "loadingHint": "This may take up to 30 seconds for a thorough review",
+    "overallScore": "Overall Score",
+    "summary": "Proposal Summary",
+    "criteriaBreakdown": "Criteria Breakdown",
+    "strengths": "Strengths",
+    "weaknesses": "Weaknesses",
+    "noWeaknesses": "No major weaknesses identified",
+    "recommendations": "Highest Impact Fixes",
+    "evaluationReport": "Evaluation Report",
+    "newEvaluation": "New Evaluation",
+    "qualityEstimate": "Proposal Quality Estimate",
+    "qualityHint": "Based on key terms and content signals — increases as you elaborate",
+    "wordCount": "words",
+    "maxWords": "Maximum 3000 words",
+    "criteria": {
+      "significance": {
+        "title": "Research Significance",
+        "desc": "How well does the proposal justify why this research matters and what gap it addresses?"
+      },
+      "innovation": {
+        "title": "Innovation",
+        "desc": "Does the proposal offer a novel approach, method, or perspective beyond existing work?"
+      },
+      "methodology": {
+        "title": "Methodology Clarity",
+        "desc": "Are the research design, data collection, and analysis steps clearly defined and appropriate?"
+      },
+      "impact": {
+        "title": "Impact & Outcomes",
+        "desc": "Are the expected outcomes, societal benefits, and knowledge contributions clearly stated?"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "email": "Email address",
+      "password": "Password",
+      "button": "Sign in",
+      "noAccount": "Don't have an account?",
+      "register": "Register here"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join the AI Academic Success Platform",
+      "name": "Full name",
+      "email": "Email address",
+      "faculty": "Faculty (optional)",
+      "password": "Password",
+      "button": "Create account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    }
+  },
+  "common": {
+    "error": "Something went wrong. Please try again.",
+    "loading": "Loading...",
+    "back": "Back",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

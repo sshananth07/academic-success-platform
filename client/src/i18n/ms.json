@@ -1,0 +1,300 @@
+{
+  "app": {
+    "name": "Platform Kejayaan Akademik AI",
+    "tagline": "Memperkasakan Pelajar B40 di Universiti Malaysia"
+  },
+  "nav": {
+    "dashboard": "Papan Pemuka",
+    "research": "Penemuan Penyelidikan",
+    "integrity": "Penasihat Integriti",
+    "writing": "Sokongan Penulisan",
+    "sources": "Pengurus Sumber",
+    "grant": "Semakan Geran",
+    "login": "Log Masuk",
+    "register": "Daftar",
+    "logout": "Log Keluar"
+  },
+  "dashboard": {
+    "welcome": "Selamat kembali",
+    "subtitle": "Bagaimana kami boleh membantu anda berjaya hari ini?",
+    "modulesLabel": "Alat anda",
+    "continueLabel": "Teruskan dari mana anda berhenti",
+    "continueBtn": "Teruskan",
+    "recentActivity": "Aktiviti Terkini",
+    "noActivity": "Tiada aktiviti lagi — pilih alat untuk bermula.",
+    "stats": {
+      "research": "Tugas Penyelidikan",
+      "sources": "Sumber Disusun",
+      "writing": "Draf Disemak"
+    },
+    "activityType": {
+      "research": "Penyelidikan",
+      "writing": "Penulisan",
+      "sources": "Sumber",
+      "grant": "Geran",
+      "chat": "Integriti"
+    },
+    "cta": {
+      "research": "Mulakan carian literatur",
+      "integrity": "Tanya soalan integriti",
+      "writing": "Semak draf"
+    },
+    "modules": {
+      "research": {
+        "title": "Penemuan Penyelidikan",
+        "desc": "Cari dan sintesis literatur akademik tentang sebarang topik",
+        "action": "Carian Baru"
+      },
+      "integrity": {
+        "title": "Penasihat Integriti",
+        "desc": "Dapatkan panduan tentang peraturan integriti akademik dan polisi penggunaan AI",
+        "action": "Tanya Soalan"
+      },
+      "writing": {
+        "title": "Sokongan Penulisan",
+        "desc": "Terima maklum balas berstruktur tentang draf akademik anda",
+        "action": "Semak Draf"
+      },
+      "sources": {
+        "title": "Pengurus Sumber",
+        "desc": "Format dan anotasi rujukan anda dalam APA Edisi Ke-7",
+        "action": "Susun Sumber"
+      },
+      "grant": {
+        "title": "Semakan Geran",
+        "desc": "Nilaikan cadangan FRGS anda berdasarkan kriteria pemarkahan",
+        "action": "Nilaikan Cadangan"
+      }
+    }
+  },
+  "research": {
+    "title": "Penemuan Penyelidikan",
+    "subtitle": "Temui dan sintesis literatur akademik daripada Semantic Scholar dan CrossRef",
+    "placeholder": "Masukkan topik penyelidikan (cth. pembelajaran mesin dalam pendidikan Malaysia)",
+    "button": "Cari",
+    "newSearch": "Carian Baru",
+    "loading": "Mencari pangkalan data akademik...",
+    "themes": "Tema Utama",
+    "findings": "Penemuan Utama",
+    "contradictions": "Percanggahan",
+    "gaps": "Jurang Penyelidikan",
+    "sources": "Sumber Dijumpai",
+    "noResults": "Tiada kertas kerja ditemui. Cuba topik carian yang lebih luas.",
+    "openAccess": "Akses Terbuka",
+    "popularTopics": "Topik Popular",
+    "whatYouGet": "Apa yang anda akan dapat",
+    "howItWorks": "Cara ia berfungsi",
+    "step1": "Kami mencari Semantic Scholar dan CrossRef untuk kertas kerja akademik sebenar tentang topik anda.",
+    "step2": "AI mensintesis literatur menjadi tema, penemuan, dan percanggahan.",
+    "step3": "Anda menerima laporan berstruktur dengan sumber yang dipetik untuk diterokai lebih lanjut."
+  },
+  "chat": {
+    "title": "Penasihat Integriti",
+    "subtitle": "Tanya tentang integriti akademik, polisi penggunaan AI, peraturan plagiat, dan piawaian petikan",
+    "placeholder": "Tanya tentang integriti akademik, plagiat, penggunaan AI, atau petikan...",
+    "send": "Hantar",
+    "newChat": "Perbualan Baru",
+    "sessions": "Perbualan Sebelumnya",
+    "typing": "Penasihat sedang berfikir...",
+    "sources": "Sumber polisi digunakan",
+    "disclaimer": "Respons berdasarkan dokumen polisi UAM",
+    "basedOn": "Berdasarkan",
+    "policyMatch": "Padanan Polisi",
+    "suggestedQuestions": "Soalan Dicadangkan",
+    "categories": {
+      "label": "Semak mengikut kategori",
+      "integrity": "Integriti Akademik",
+      "ai": "Penggunaan AI",
+      "plagiarism": "Plagiat",
+      "citation": "Peraturan Petikan",
+      "assessment": "Polisi Penilaian"
+    },
+    "confidence": {
+      "High": "Tinggi",
+      "Medium": "Sederhana",
+      "Low": "Rendah"
+    }
+  },
+  "writing": {
+    "title": "Sokongan Penulisan",
+    "subtitle": "Dapatkan maklum balas berstruktur tentang draf akademik anda",
+    "placeholder": "Tampal pengenalan, perbincangan, atau draf penuh anda untuk semakan...",
+    "button": "Dapatkan Maklum Balas",
+    "newReview": "Semakan Baru",
+    "loading": "Menganalisis draf anda...",
+    "wordCount": "patah perkataan",
+    "maxWords": "Maksimum 1000 patah perkataan",
+    "minWords": "Minimum 10 patah perkataan",
+    "clarity": "Kejelasan",
+    "academicTone": "Nada Akademik",
+    "structure": "Struktur",
+    "evidence": "Penggunaan Bukti",
+    "grammar": "Tatabahasa",
+    "criticalAnalysis": "Analisis Kritikal",
+    "citations": "Analisis Petikan",
+    "paragraphFeedback": "Maklum Balas Peringkat Perenggan",
+    "grammarIssues": "Isu Tatabahasa",
+    "strengths": "Kekuatan",
+    "improvements": "Cadangan Penambahbaikan",
+    "hasCitations": "Petikan dikesan",
+    "noCitations": "Tiada petikan dikesan",
+    "whatYouGet": "Apa yang anda akan dapat",
+    "metrics": {
+      "words": "Patah Perkataan",
+      "tone": "Nada Akademik",
+      "readability": "Kebolehbacaan",
+      "passive": "Ayat Pasif"
+    },
+    "toneLevel": {
+      "Good": "Baik",
+      "Fair": "Sederhana",
+      "Weak": "Lemah"
+    },
+    "readabilityLevel": {
+      "Easy": "Mudah",
+      "Medium": "Sederhana",
+      "Complex": "Kompleks"
+    },
+    "severity": {
+      "high": "Perlu penulisan semula",
+      "medium": "Perlu penambahbaikan",
+      "low": "Perubahan kecil"
+    },
+    "dimensions": {
+      "structure": "Struktur",
+      "clarity": "Kejelasan",
+      "tone": "Nada Akademik",
+      "grammar": "Tatabahasa",
+      "evidence": "Penggunaan Bukti",
+      "critical": "Analisis Kritikal"
+    }
+  },
+  "sources": {
+    "title": "Pengurus Sumber",
+    "subtitle": "Tambah URL, DOI, atau tajuk kertas kerja — dapatkan petikan APA Edisi Ke-7 dengan segera",
+    "addSource": "Tambah Sumber",
+    "addPlaceholder": "Tampal URL, DOI, atau tajuk kertas kerja…",
+    "button": "Susun Sumber",
+    "loading": "Memformat rujukan anda...",
+    "results": "Rujukan Anda",
+    "newSession": "Mulakan Semula",
+    "duplicate": "Sumber sudah wujud",
+    "maxReached": "Had maksimum 15 sumber telah dicapai",
+    "emptyHint": "Tambah sekurang-kurangnya satu sumber untuk bermula",
+    "sourceType": {
+      "journal-article": "Artikel Jurnal",
+      "book": "Buku",
+      "website": "Laman Web",
+      "conference-paper": "Kertas Persidangan",
+      "report": "Laporan",
+      "thesis": "Tesis",
+      "unknown": "Tidak Diketahui"
+    },
+    "sourceTypeShort": {
+      "journal-article": "DOI / Jurnal",
+      "book": "Buku",
+      "website": "Laman Web",
+      "conference-paper": "Persidangan",
+      "report": "Laporan",
+      "thesis": "Tesis",
+      "unknown": "Tidak Diketahui"
+    },
+    "credibility": {
+      "peer-reviewed": "Dinilai Rakan Sejawat",
+      "grey-literature": "Literatur Kelabu",
+      "news": "Berita",
+      "blog": "Blog",
+      "unknown": "Tidak Diketahui"
+    },
+    "export": {
+      "copyApa": "Salin APA",
+      "copyAll": "Salin Semua",
+      "bibtex": "Eksport BibTeX",
+      "ris": "Eksport RIS",
+      "word": "Eksport Word",
+      "copied": "Disalin!"
+    },
+    "preview": {
+      "label": "Pratonton APA",
+      "hint": "Petikan akhir akan dijana selepas penyusunan"
+    },
+    "accessible": "Akses Terbuka",
+    "maxSources": "Maksimum 15 sumber",
+    "history": {
+      "label": "Sesi Disimpan",
+      "empty": "Tiada sesi disimpan lagi",
+      "sources": "sumber",
+      "sources_plural": "sumber",
+      "loadError": "Tidak dapat memuatkan sesi"
+    }
+  },
+  "grant": {
+    "title": "Semakan Cadangan Geran",
+    "subtitle": "Nilaikan cadangan FRGS anda berdasarkan empat kriteria pemarkahan utama",
+    "placeholder": "Tampal teks cadangan geran anda di sini (minimum 50 patah perkataan, maksimum 3000 patah perkataan)...",
+    "button": "Nilaikan Cadangan",
+    "loading": "Menilai cadangan anda...",
+    "loadingHint": "Ini mungkin mengambil masa sehingga 30 saat untuk semakan menyeluruh",
+    "overallScore": "Skor Keseluruhan",
+    "summary": "Ringkasan Cadangan",
+    "criteriaBreakdown": "Pecahan Kriteria",
+    "strengths": "Kekuatan",
+    "weaknesses": "Kelemahan",
+    "noWeaknesses": "Tiada kelemahan utama dikenal pasti",
+    "recommendations": "Pembaikan Impak Tertinggi",
+    "evaluationReport": "Laporan Penilaian",
+    "newEvaluation": "Penilaian Baharu",
+    "qualityEstimate": "Anggaran Kualiti Cadangan",
+    "qualityHint": "Berdasarkan istilah kunci dan isyarat kandungan — meningkat apabila anda menghuraikan",
+    "wordCount": "patah perkataan",
+    "maxWords": "Maksimum 3000 patah perkataan",
+    "criteria": {
+      "significance": {
+        "title": "Kepentingan Penyelidikan",
+        "desc": "Sejauh mana cadangan itu membuktikan kepentingan penyelidikan ini dan jurang yang ditangani?"
+      },
+      "innovation": {
+        "title": "Inovasi",
+        "desc": "Adakah cadangan menawarkan pendekatan, kaedah, atau perspektif baharu melebihi kerja sedia ada?"
+      },
+      "methodology": {
+        "title": "Kejelasan Metodologi",
+        "desc": "Adakah reka bentuk penyelidikan, pengumpulan data, dan langkah analisis ditakrifkan dengan jelas?"
+      },
+      "impact": {
+        "title": "Impak & Hasil",
+        "desc": "Adakah hasil yang dijangkakan, manfaat masyarakat, dan sumbangan ilmu dinyatakan dengan jelas?"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Selamat kembali",
+      "subtitle": "Log masuk ke akaun anda",
+      "email": "Alamat e-mel",
+      "password": "Kata laluan",
+      "button": "Log masuk",
+      "noAccount": "Belum ada akaun?",
+      "register": "Daftar di sini"
+    },
+    "register": {
+      "title": "Cipta akaun anda",
+      "subtitle": "Sertai Platform Kejayaan Akademik AI",
+      "name": "Nama penuh",
+      "email": "Alamat e-mel",
+      "faculty": "Fakulti (pilihan)",
+      "password": "Kata laluan",
+      "button": "Cipta akaun",
+      "hasAccount": "Sudah ada akaun?",
+      "login": "Log masuk"
+    }
+  },
+  "common": {
+    "error": "Sesuatu telah berlaku. Sila cuba lagi.",
+    "loading": "Memuatkan...",
+    "back": "Kembali",
+    "close": "Tutup",
+    "save": "Simpan",
+    "cancel": "Batal"
+  }
+}
