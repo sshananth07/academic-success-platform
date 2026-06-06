@@ -165,17 +165,17 @@ function FeedbackDashboard({ result, onNewReview }) {
   const { t } = useTranslation()
 
   const scoreMap = {
-    structure: result.structureScore,
-    clarity:   result.clarityScore,
-    tone:      result.academicToneScore,
-    grammar:   result.grammarScore,
-    evidence:  result.evidenceScore,
-    critical:  result.criticalAnalysisScore,
+    structure: normaliseScore(result.structureScore),
+    clarity:   normaliseScore(result.clarityScore),
+    tone:      normaliseScore(result.academicToneScore),
+    grammar:   normaliseScore(result.grammarScore),
+    evidence:  normaliseScore(result.evidenceScore),
+    critical:  normaliseScore(result.criticalAnalysisScore),
   }
 
-  const overallScore = Math.round(
+  const overallScore = Math.min(10, Math.round(
     Object.values(scoreMap).reduce((a, b) => a + (b || 0), 0) / DIMENSIONS.length
-  )
+  ))
 
   return (
     <div className="space-y-6">
@@ -326,9 +326,16 @@ function timeAgo(iso) {
   return new Date(iso).toLocaleDateString()
 }
 
+function normaliseScore(score) {
+  if (score == null) return 0
+  if (score > 10) return Math.round(score / 10 * 10) / 10
+  return score
+}
+
 function scoreColor(score) {
-  if (!score) return 'text-gray-400'
-  return score >= 8 ? 'text-green-600' : score >= 6 ? 'text-yellow-600' : 'text-red-500'
+  const s = normaliseScore(score)
+  if (!s) return 'text-gray-400'
+  return s >= 8 ? 'text-green-600' : s >= 6 ? 'text-yellow-600' : 'text-red-500'
 }
 
 function HistorySidebar({ history, loadingHistory, activeId, onLoad, onNewReview }) {
@@ -369,7 +376,7 @@ function HistorySidebar({ history, loadingHistory, activeId, onLoad, onNewReview
             <div className="flex items-center gap-2 mt-0.5">
               {item.clarity_score != null && (
                 <span className={`text-xs font-semibold ${scoreColor(item.clarity_score)}`}>
-                  {item.clarity_score}/10
+                  {normaliseScore(item.clarity_score)}/10
                 </span>
               )}
               <span className="text-gray-200">·</span>

@@ -29,6 +29,16 @@ async def review_writing(
     feedback = await AIService.generate_structured(system_prompt, "Review this academic draft.")
     feedback = strip_replacement_paragraphs(feedback)
 
+    # Normalise scores to 0–10 regardless of what the model returns
+    score_keys = ["clarityScore", "academicToneScore", "structureScore",
+                  "evidenceScore", "grammarScore", "criticalAnalysisScore"]
+    for key in score_keys:
+        val = feedback.get(key)
+        if isinstance(val, (int, float)):
+            if val > 10:
+                val = round(val / 10, 1)
+            feedback[key] = max(0, min(10, val))
+
     review = WritingReview(
         user_id=user.id,
         draft_text=req.text,
