@@ -29,15 +29,16 @@ async def review_writing(
     feedback = await AIService.generate_structured(system_prompt, "Review this academic draft.")
     feedback = strip_replacement_paragraphs(feedback)
 
-    # Normalise scores to 0–10 regardless of what the model returns
+    # Normalise and validate all 6 scores — must be 1–10, never missing
     score_keys = ["clarityScore", "academicToneScore", "structureScore",
                   "evidenceScore", "grammarScore", "criticalAnalysisScore"]
     for key in score_keys:
         val = feedback.get(key)
-        if isinstance(val, (int, float)):
-            if val > 10:
-                val = round(val / 10, 1)
-            feedback[key] = max(0, min(10, val))
+        if not isinstance(val, (int, float)) or val is None:
+            val = 5  # safe fallback for missing score
+        if val > 10:
+            val = round(val / 10, 1)
+        feedback[key] = max(1, min(10, round(val)))
 
     review = WritingReview(
         user_id=user.id,
