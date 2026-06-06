@@ -15,7 +15,7 @@ export function Navbar() {
   return (
     <header className="bg-navy text-white px-4 py-3 flex items-center justify-between sticky top-0 z-50 shadow-lg">
       <Link to="/" className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center font-bold text-sm">AI</div>
+        <img src="/logo.png" alt="Logo" className="w-9 h-9 rounded-xl object-cover flex-shrink-0" />
         <span className="font-serif text-lg hidden sm:block">{t('app.name')}</span>
       </Link>
 
