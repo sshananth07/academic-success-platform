@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import api from '../services/api'
 import { Button } from '../components/ui/Button'
@@ -312,6 +312,76 @@ function FeedbackDashboard({ result, onNewReview }) {
   )
 }
 
+// ─── History helpers ──────────────────────────────────────────────────────────
+
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime()
+  const m = Math.floor(diff / 60000)
+  if (m < 1) return 'just now'
+  if (m < 60) return `${m}m ago`
+  const h = Math.floor(m / 60)
+  if (h < 24) return `${h}h ago`
+  const d = Math.floor(h / 24)
+  if (d < 7) return `${d}d ago`
+  return new Date(iso).toLocaleDateString()
+}
+
+function scoreColor(score) {
+  if (!score) return 'text-gray-400'
+  return score >= 8 ? 'text-green-600' : score >= 6 ? 'text-yellow-600' : 'text-red-500'
+}
+
+function HistorySidebar({ history, loadingHistory, activeId, onLoad, onNewReview }) {
+  const { t } = useTranslation()
+  return (
+    <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden flex flex-col">
+      <div className="px-4 py-3 border-b border-gray-50 bg-gray-50 flex items-center justify-between">
+        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+          {t('writing.history.label')}
+        </span>
+        <button
+          onClick={onNewReview}
+          className="text-xs text-accent hover:text-accent-dark font-medium transition-colors"
+        >
+          + {t('writing.newReview')}
+        </button>
+      </div>
+      <div className="flex-1 overflow-y-auto max-h-[70vh]">
+        {loadingHistory && (
+          <div className="flex justify-center py-8"><Spinner size="sm" /></div>
+        )}
+        {!loadingHistory && history.length === 0 && (
+          <p className="text-xs text-gray-400 text-center py-8 px-4">
+            {t('writing.history.empty')}
+          </p>
+        )}
+        {!loadingHistory && history.map(item => (
+          <button
+            key={item.id}
+            onClick={() => onLoad(item.id)}
+            className={`w-full text-left px-4 py-3 border-b border-gray-50 last:border-0 transition-colors hover:bg-gray-50 ${
+              activeId === item.id ? 'bg-orange-50 border-l-2 border-l-orange-400' : ''
+            }`}
+          >
+            <p className="text-xs font-medium text-navy truncate leading-snug mb-0.5">
+              {item.preview || t('writing.history.untitled')}
+            </p>
+            <div className="flex items-center gap-2 mt-0.5">
+              {item.clarity_score != null && (
+                <span className={`text-xs font-semibold ${scoreColor(item.clarity_score)}`}>
+                  {item.clarity_score}/10
+                </span>
+              )}
+              <span className="text-gray-200">·</span>
+              <span className="text-xs text-gray-400">{timeAgo(item.created_at)}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function WritingSupport() {
@@ -319,7 +389,11 @@ export default function WritingSupport() {
   const [text, setText] = useState('')
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [loadingSession, setLoadingSession] = useState(false)
   const [error, setError] = useState('')
+  const [history, setHistory] = useState([])
+  const [loadingHistory, setLoadingHistory] = useState(true)
+  const [activeId, setActiveId] = useState(null)
 
   const wordCount = useMemo(
     () => (text.trim() ? text.trim().split(/\s+/).length : 0),
@@ -327,15 +401,35 @@ export default function WritingSupport() {
   )
   const metrics = useMemo(() => computeMetrics(text), [text])
 
+  // Load history on mount
+  useEffect(() => {
+    let cancelled = false
+    api.get('/api/writing/history')
+      .then(res => { if (!cancelled) setHistory(res.data) })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setLoadingHistory(false) })
+    return () => { cancelled = true }
+  }, [])
+
+  const refreshHistory = async () => {
+    try {
+      const res = await api.get('/api/writing/history')
+      setHistory(res.data)
+    } catch {}
+  }
+
   const handleReview = async (e) => {
     e.preventDefault()
     if (wordCount < MIN_WORDS || wordCount > MAX_WORDS) return
     setLoading(true)
     setError('')
     setResult(null)
+    setActiveId(null)
     try {
       const { data } = await api.post('/api/writing/review', { text, language: i18n.language })
       setResult(data.feedback)
+      setActiveId(data.review_id)
+      await refreshHistory()
     } catch (err) {
       setError(err.response?.data?.detail || t('common.error'))
     } finally {
@@ -343,81 +437,125 @@ export default function WritingSupport() {
     }
   }
 
+  const handleLoadSession = async (id) => {
+    if (id === activeId) return
+    setLoadingSession(true)
+    setError('')
+    try {
+      const { data } = await api.get(`/api/writing/${id}`)
+      setText(data.draft_text || '')
+      setResult(data.feedback)
+      setActiveId(id)
+    } catch {
+      setError('Could not load review')
+    } finally {
+      setLoadingSession(false)
+    }
+  }
+
   const handleNewReview = () => {
     setResult(null)
     setError('')
     setText('')
+    setActiveId(null)
   }
 
-  const showPreview = !result && !loading
+  const showPreview = !result && !loading && !loadingSession
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 pb-24 md:pb-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 pb-24 md:pb-8">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-serif text-navy">{t('writing.title')}</h1>
         <p className="text-gray-500 mt-1 text-sm">{t('writing.subtitle')}</p>
       </div>
 
-      {/* Input form — hidden after results */}
-      {!result && (
-        <form onSubmit={handleReview} className="mb-4">
-          <div className="relative">
-            <textarea
-              value={text}
-              onChange={e => setText(e.target.value)}
-              placeholder={t('writing.placeholder')}
-              rows={10}
-              className="input-field resize-y w-full pb-10"
-              disabled={loading}
-            />
-            {/* Word count overlay */}
-            <div className={`absolute bottom-3 right-3 text-xs font-medium ${wordCount > MAX_WORDS ? 'text-red-500' : 'text-gray-400'}`}>
-              {wordCount}/{MAX_WORDS}
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 items-start">
+
+        {/* History sidebar */}
+        <HistorySidebar
+          history={history}
+          loadingHistory={loadingHistory}
+          activeId={activeId}
+          onLoad={handleLoadSession}
+          onNewReview={handleNewReview}
+        />
+
+        {/* Main panel */}
+        <div className="min-w-0">
+
+          {/* Input form — hidden after results */}
+          {!result && !loadingSession && (
+            <form onSubmit={handleReview} className="mb-4">
+              <div className="relative">
+                <textarea
+                  value={text}
+                  onChange={e => setText(e.target.value)}
+                  placeholder={t('writing.placeholder')}
+                  rows={10}
+                  className="input-field resize-y w-full pb-10"
+                  disabled={loading}
+                />
+                <div className={`absolute bottom-3 right-3 text-xs font-medium ${wordCount > MAX_WORDS ? 'text-red-500' : 'text-gray-400'}`}>
+                  {wordCount}/{MAX_WORDS}
+                </div>
+              </div>
+
+              <LiveMetricsBar metrics={metrics} wordCount={wordCount} maxWords={MAX_WORDS} />
+
+              <div className="flex justify-between items-center mt-2">
+                <p className="text-xs text-gray-400">{t('writing.minWords')} · {t('writing.maxWords')}</p>
+                <Button
+                  type="submit"
+                  loading={loading}
+                  disabled={wordCount < MIN_WORDS || wordCount > MAX_WORDS || loading}
+                >
+                  {t('writing.button')}
+                </Button>
+              </div>
+            </form>
+          )}
+
+          {/* Error */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-4">
+              {error}
             </div>
-          </div>
+          )}
 
-          {/* Live metrics bar */}
-          <LiveMetricsBar metrics={metrics} wordCount={wordCount} maxWords={MAX_WORDS} />
+          {/* Loading */}
+          {(loading || loadingSession) && (
+            <div className="flex flex-col items-center gap-4 py-20 text-center">
+              <Spinner size="lg" />
+              <div>
+                <p className="text-navy font-medium">
+                  {loading ? t('writing.loading') : 'Loading review…'}
+                </p>
+                {loading && <p className="text-gray-400 text-sm mt-1">Analysing 6 dimensions of your writing…</p>}
+              </div>
+            </div>
+          )}
 
-          <div className="flex justify-between items-center mt-2">
-            <p className="text-xs text-gray-400">{t('writing.minWords')} · {t('writing.maxWords')}</p>
-            <Button
-              type="submit"
-              loading={loading}
-              disabled={wordCount < MIN_WORDS || wordCount > MAX_WORDS || loading}
-            >
-              {t('writing.button')}
-            </Button>
-          </div>
-        </form>
-      )}
+          {/* Dimension preview (empty state) */}
+          {showPreview && wordCount === 0 && <DimensionPreview />}
 
-      {/* Error */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-4">
-          {error}
+          {/* Feedback dashboard */}
+          {result && !loading && !loadingSession && (
+            <>
+              {/* Show the draft text used */}
+              {text && (
+                <div className="mb-5 bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+                    {t('writing.history.draftLabel')}
+                  </p>
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-4">{text}</p>
+                </div>
+              )}
+              <FeedbackDashboard result={result} onNewReview={handleNewReview} />
+            </>
+          )}
         </div>
-      )}
-
-      {/* Loading */}
-      {loading && (
-        <div className="flex flex-col items-center gap-4 py-20 text-center">
-          <Spinner size="lg" />
-          <div>
-            <p className="text-navy font-medium">{t('writing.loading')}</p>
-            <p className="text-gray-400 text-sm mt-1">Analysing 6 dimensions of your writing…</p>
-          </div>
-        </div>
-      )}
-
-      {/* Dimension preview (empty state) */}
-      {showPreview && wordCount === 0 && <DimensionPreview />}
-
-      {/* Feedback dashboard */}
-      {result && !loading && (
-        <FeedbackDashboard result={result} onNewReview={handleNewReview} />
-      )}
+      </div>
     </div>
   )
 }

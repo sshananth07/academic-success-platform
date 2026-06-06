@@ -160,6 +160,12 @@
       "medium": "Needs improvement",
       "low": "Minor tweak"
     },
+    "history": {
+      "label": "Past Reviews",
+      "empty": "No reviews yet",
+      "untitled": "Untitled draft",
+      "draftLabel": "Reviewed Draft"
+    },
     "dimensions": {
       "structure": "Structure",
       "clarity": "Clarity",

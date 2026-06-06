@@ -17,5 +17,15 @@ class WritingReviewResponse(BaseModel):
     language: str
     clarity_score: int | None
     created_at: datetime
+    preview: str = ""
 
     model_config = {"from_attributes": True}
+
+
+class WritingReviewDetailResponse(BaseModel):
+    id: str
+    language: str
+    clarity_score: int | None
+    created_at: datetime
+    draft_text: str
+    feedback: dict

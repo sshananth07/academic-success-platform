@@ -160,6 +160,12 @@
       "medium": "Perlu penambahbaikan",
       "low": "Perubahan kecil"
     },
+    "history": {
+      "label": "Semakan Lepas",
+      "empty": "Tiada semakan lagi",
+      "untitled": "Draf tanpa tajuk",
+      "draftLabel": "Draf Disemak"
+    },
     "dimensions": {
       "structure": "Struktur",
       "clarity": "Kejelasan",
